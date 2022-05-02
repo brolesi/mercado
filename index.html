@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.webmanifest">
     <title>Mercado</title>
 </head>
 
@@ -49,7 +50,7 @@
             r_p2 = parseFloat($('#valor_p2').val()) / (parseFloat($('#unidade_p2').val()) * parseFloat($('#quantidade_p2').val()))
             $('#resultado_p1').text(r_p1)
             $('#resultado_p2').text(r_p2)
-            if(r_p1 > r_p2) {
+            if (r_p1 > r_p2) {
                 $('#resultado_final').html('<h2>' + $('#nome_p2').val() + ' mais vantajoso</h2>')
             } else {
                 $('#resultado_final').html('<h2>' + $('#nome_p1').val() + ' mais vantajoso</h2>')
@@ -63,8 +64,13 @@
             })
             $('input').keypress(function () {
                 get_rate()
-            })            
+            })
         })
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+
 
     </script>
 </body>
