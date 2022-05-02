@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado</title>
+</head>
+
+<body>
+    <h1>Comparativo de produtos no mercado</h1>
+    <table cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <th></th>
+                <th><input type="text" name="nome_p1" id="nome_p1" value="Produto 1"></th>
+                <th><input type="text" name="nome_p2" id="nome_p2" value="Produto 2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Unidades <span class="detalhe">geralmente 1</span></td>
+                <td><input type="number" name="unidade_p1" id="unidade_p1" value="1"></td>
+                <td><input type="number" name="unidade_p2" id="unidade_p2" value="1"></td>
+            </tr>
+            <tr>
+                <td>Quantidade da unidade <span class="detalhe">(ml, l, g, kg, metros)</span></td>
+                <td><input type="number" name="quantidade_p1" id="quantidade_p1" value="1000"></td>
+                <td><input type="number" name="quantidade_p2" id="quantidade_p2" value="1500"></td>
+            </tr>
+            <tr>
+                <td>Valor</td>
+                <td><input type="number" name="valor_p1" id="valor_p1" value="10"></td>
+                <td><input type="number" name="valor_p2" id="valor_p2" value="12"></td>
+            </tr>
+            <tr>
+                <td>Valor por menor unidade de medida:</td>
+                <td id="resultado_p1"></td>
+                <td id="resultado_p2"></td>
+            </tr>
+    </table>
+    <div id="resultado_final"></div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>
+
+        function get_rate() {
+            r_p1 = parseFloat($('#valor_p1').val()) / (parseFloat($('#unidade_p1').val()) * parseFloat($('#quantidade_p1').val()))
+            r_p2 = parseFloat($('#valor_p2').val()) / (parseFloat($('#unidade_p2').val()) * parseFloat($('#quantidade_p2').val()))
+            $('#resultado_p1').text(r_p1)
+            $('#resultado_p2').text(r_p2)
+            if(r_p1 > r_p2) {
+                $('#resultado_final').html($('#nome_p2').val() + ' mais vantajoso')
+            } else {
+                $('#resultado_final').html($('#nome_p1').val() + ' mais vantajoso')
+            }
+        }
+
+        $(document).ready(function () {
+            get_rate()
+            $('input').change(function () {
+                get_rate()
+            })
+            $('input').keypress(function () {
+                get_rate()
+            })            
+        })
+
+    </script>
+</body>
+
+</html>
